@@ -1,0 +1,37 @@
+https://pillow.readthedocs.io/en/stable/handbook/tutorial.html
+
+(env) devel@pi5-70:~/virtual-python-xstools $ pip3 install Pillow
+
+(env) devel@pi5-70:~/virtual-python-xstools $ python3
+Python 3.11.2 (main, Apr 28 2025, 14:11:48) [GCC 12.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>from PIL import Image
+>>> im = Image.open("r-lena_rgb_256.png")
+>>> print(im.format, im.size, im.mode)
+PNG (256, 256) RGB
+>>> im.show()
+>>> r, g, b = im.split()
+>>> r.show()
+>>> g.show()
+>>> b.show()
+
+from PIL import Image
+
+# List of image filenames
+image_filenames = [
+    "hopper.jpg",
+    "rotated_hopper_270.jpg",
+    "rotated_hopper_180.jpg",
+    "rotated_hopper_90.jpg",
+]
+
+# Open images and create a list
+images = [Image.open(filename) for filename in image_filenames]
+
+# Save the images as an animated GIF
+images[0].save(
+    "animated_hopper.gif",
+    append_images=images[1:],
+    duration=500,  # duration of each frame in milliseconds
+    loop=0,  # loop forever
+)
