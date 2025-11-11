@@ -118,17 +118,15 @@ def fwt97(s, width, height):
         # Predict 1. y1
 
         for row in range(2, height, 2):
-
-			s[row][col] = (s[row][col] - ((int(s[row-1][col])>>1) + (int(s[row+1][col])>>1)))
+            s[row][col] = (s[row][col] - ((int(s[row-1][col])>>1) + (int(s[row+1][col])>>1)))
             #s[row][col] += a1 * (s[row-1][col] + s[row+1][col])
 
 
         # Update 1. y0
 
         for row in range(1, height-1, 2):
-
-			s[row][col] = (s[row][col] + ((int(s[row-1][col]) + int(s[row+1][col]) + 2)>>2))
-    s = de_interleave(s,height,width)
+            s[row][col] = (s[row][col] + ((int(s[row-1][col]) + int(s[row+1][col]) + 2)>>2))
+            s = de_interleave(s,height,width)
     return s
 
 
@@ -141,8 +139,8 @@ def iwt97(s, width, height):
     for col in range(width/2):
         for row in range(height):
 
-			temp_bank[col * 2][row] = s[row][col]
-			temp_bank[col * 2 + 1][row] =  s[row][col + width/2]
+            temp_bank[col * 2][row] = s[row][col]
+            temp_bank[col * 2 + 1][row] =  s[row][col + width/2]
     for row in range(width):
         for col in range(height):
             s[row][col] = temp_bank[row][col]
@@ -154,15 +152,14 @@ def iwt97(s, width, height):
         # Inverse update 2.
         for row in range(1, height-1, 2):
 
-			s[row][col] = (s[row][col] - ((int(s[row-1][col]) + int(s[row+1][col]) + 2)>>2))
+            s[row][col] = (s[row][col] - ((int(s[row-1][col]) + int(s[row+1][col]) + 2)>>2))
 
             #s[row][col] += a4 * (s[row-1][col] + s[row+1][col])
-        #s[0][col] += 2 * a4 * s[1][col]
+            #s[0][col] += 2 * a4 * s[1][col]
 
         # Inverse predict 2.
         for row in range(2, height, 2):
-
-			s[row][col] = (s[row][col] + ((int(s[row-1][col])>>1) + (int(s[row+1][col])>>1)))
+            s[row][col] = (s[row][col] + ((int(s[row-1][col])>>1) + (int(s[row+1][col])>>1)))
             #s[row][col] += a3 * (s[row-1][col] + s[row+1][col])
         #s[height-1][col] += 2 * a3 * s[height-2][col]
 

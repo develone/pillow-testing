@@ -3,8 +3,8 @@ from _jpegEnc import JPEGEnc2k
 import math
  
 jp2k = JPEGEnc2k()
-#help(jp2k)
-jp2k.set_img_fn("../jpeg2k/parallel_jpeg/lena_rgb_512.png")
+help(jp2k)
+jp2k.set_img_fn("../lena_rgb_256.png")
 #jp2k.set_img_fn("../lena.jpg")
 #jp2k.set_img_fn("../lena_256.png")
 #jp2k.set_img_fn("../lena_128.png")
@@ -13,22 +13,22 @@ jp2k.set_img_fn("../jpeg2k/parallel_jpeg/lena_rgb_512.png")
 f = [5, 3]
 jp2k.set_filter(f)
 
-print jp2k.get_img_fn()
+print(jp2k.get_img_fn())
 jp2k.read_image_file()
 mode = jp2k.get_mode()
 lvl = jp2k.get_dwt_level()
 jp2k.set_dwt_level(3)
-#lvl = jp2k.get_dwt_level()
+lvl = jp2k.get_dwt_level()
 if (jp2k.get_filter() == [9,7]):
     jp2k.fwd_f_dwt()
 else:
     jp2k.fwd_dwt()
 im = jp2k.get_img()
 #im = im.crop((0,0,32,32))
-print im.size
+print(im.size)
 n = list(im.getdata())
 
-print len(n)
+print(len(n))
 x = []
 p = []
 non_zero = 0

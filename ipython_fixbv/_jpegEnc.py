@@ -113,7 +113,7 @@ class JPEGEnc2k(object):
         self.N1 = val1
         self.N2 = val2
         self.tiles  = (self.N1,self.N2,) 
-        #print self.N1, self.N2, self.tiles, type(self.tiles)
+        print((self.N1, self.N2, self.tiles, type(self.tiles)))
 
     '''origin is a tuple'''
     def set_origin_omega1_omega2(self,val1, val2):
@@ -121,17 +121,17 @@ class JPEGEnc2k(object):
         self.omega1 = val1
         self.omega2 = val2
         self.origin  = (self.omega1,self.omega2,) 
-        #print self.omega1, self.omega2, self.origin, type(self.origin)
+        print((self.omega1, self.omega2, self.origin, type(self.origin)))
  
     def read_image_file(self):
         if (self.img_fn == ""):
-            print "img_fn is not set:"
-            print "use jp2k.set_img_fn(filename)"
+            print("img_fn is not set:")
+            print("use jp2k.set_img_fn(filename)")
         else:
             self.img = Image.open(self.img_fn)
             self.mode = self.img.mode
             self.width, self.height = self.img.size
-            print self.mode, self.width, self.height
+            print((self.mode, self.width, self.height))
 
             if (self.mode == "RGB"):
                rgb = list(self.img.getdata())
@@ -143,16 +143,16 @@ class JPEGEnc2k(object):
                   self.r_subband.append(rr)
                   self.g_subband.append(gg)
                   self.b_subband.append(bb)
-               #print rgb,len(rgb)
+                  #print (rgb,len(rgb))
                for n in range(len(rgb)):
                    r,g,b = rgb[n]
-                   print r
+                   print(r)
                for n in range(len(rgb)):
                    r,g,b = rgb[n]
-                   print g
+                   print(g)
                for n in range(len(rgb)):
                    r,g,b = rgb[n]
-                   print b
+                   print(b)
                self.r_subband = [self.r_subband[i:i+self.img.size[0]] for i in range(0, len(self.r_subband), self.img.size[0])]
                self.g_subband = [self.g_subband[i:i+self.img.size[0]] for i in range(0, len(self.g_subband), self.img.size[0])]
                self.b_subband = [self.b_subband[i:i+self.img.size[0]] for i in range(0, len(self.b_subband), self.img.size[0])]
@@ -163,9 +163,9 @@ class JPEGEnc2k(object):
                            self.r_subband[row][col] = float(self.r_subband[row][col])
                            self.g_subband[row][col] = float(self.g_subband[row][col])
                            self.b_subband[row][col] = float(self.b_subband[row][col])
-                   print 'Red', len(self.r_subband[0]), len(self.r_subband[1])
-                   print 'Green', len(self.g_subband[0]),len(self.g_subband[1])
-                   print 'Blue', len(self.b_subband[0]),len(self.b_subband[1])
+                   print(('Red', len(self.r_subband[0]), len(self.r_subband[1])))
+                   print(('Green', len(self.g_subband[0]),len(self.g_subband[1])))
+                   print(('Blue', len(self.b_subband[0]),len(self.b_subband[1])))
                
         
             else:
@@ -177,7 +177,7 @@ class JPEGEnc2k(object):
                      for row in range(0, len(self.gr_subband)):
                         for col in range(0, len(self.gr_subband[0])):
                             self.gr_subband[row][col] = float(self.gr_subband[row][col])
-                  print 'Gray', len(self.gr_subband[0]), len(self.gr_subband[1])
+                  print(('Gray', len(self.gr_subband[0]), len(self.gr_subband[1])))
 
     def col_dwt(self,cc):
         #print cc
@@ -191,14 +191,14 @@ class JPEGEnc2k(object):
             #print self.fwd_gr[row][cc] 
 
     def fwd_dwt(self):
-        print "forward dwt using file ", self.img_fn, "dwt_level", self.dwt_level, "dwt_filter", self.filter
+        print(("forward dwt using file ", self.img_fn, "dwt_level", self.dwt_level, "dwt_filter", self.filter))
         if (self.mode == "RGB"):
             self.fwd_r = self.r_subband
             self.fwd_g = self.g_subband
             self.fwd_b = self.b_subband 
-            self.fwd_r = dwt.fwt97_2d(self.fwd_r, self.dwt_level)
-            self.fwd_g = dwt.fwt97_2d(self.fwd_g, self.dwt_level)
-            self.fwd_b = dwt.fwt97_2d(self.fwd_b, self.dwt_level)
+            #self.fwd_r = dwt.fwt97_2d(self.fwd_r, self.dwt_level)
+            #self.fwd_g = dwt.fwt97_2d(self.fwd_g, self.dwt_level)
+            #self.fwd_b = dwt.fwt97_2d(self.fwd_b, self.dwt_level)
             rgb = []
             for row in range(len(self.fwd_r)):
                 for col in range(len(self.fwd_r)):
@@ -212,7 +212,7 @@ class JPEGEnc2k(object):
             #'''
             # Not calling the waveletsim_53 fwt97_2d
             # Instead using the a local function which performs 1 col at time
-            print 'performing 1 column at a time'
+            print('performing 1 column at a time')
             for ccc in range(self.get_width()):
                 self.col_dwt(ccc)
             self.fwd_gr = dwt.de_interleave(self.fwd_gr,self.get_height(),self.get_width())
@@ -227,7 +227,7 @@ class JPEGEnc2k(object):
            
 
     def fwd_f_dwt(self):
-        print "forward dwt using file ", self.img_fn, "dwt_level", self.dwt_level, "dwt_filter", self.filter
+        print(("forward dwt using file ", self.img_fn, "dwt_level", self.dwt_level, "dwt_filter", self.filter))
         if (self.mode == "RGB"):
             self.fwd_r = self.r_subband
             self.fwd_g = self.g_subband
