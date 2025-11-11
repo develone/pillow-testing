@@ -1,0 +1,59 @@
+ubuntu@vps-a35f6ef3:~$ diff .bashrc .bashrc.orig 
+118,122d117
+< 
+< export PATH="$HOME/.pyenv/bin:$PATH"
+< eval "$(pyenv init --path)"
+< eval "$(pyenv virtualenv-init -)"
+< 
+
+ubuntu@vps-a35f6ef3:~/pillow-testing$ sudo apt install python3.12-venv
+
+ubuntu@vps-a35f6ef3:~$ dpkg -l | sort > pkgs111025-6.txt
+
+(env) ubuntu@vps-a35f6ef3:~/pillow-testing$ pip3 install pillow
+Collecting pillow
+  Downloading pillow-12.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.8 kB)
+Downloading pillow-12.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (7.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.0/7.0 MB 33.0 MB/s eta 0:00:00
+Installing collected packages: pillow
+Successfully installed pillow-12.0.0
+
+(env) ubuntu@vps-a35f6ef3:~/pillow-testing$ pip3 install myhdl
+Collecting myhdl
+  Downloading myhdl-0.11.51-py3-none-any.whl.metadata (3.4 kB)
+Downloading myhdl-0.11.51-py3-none-any.whl (163 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 164.0/164.0 kB 8.7 MB/s eta 0:00:00
+Installing collected packages: myhdl
+Successfully installed myhdl-0.11.51
+
+(env) ubuntu@vps-a35f6ef3:~/pillow-testing/env/share/myhdl/cosimulation/icarus$ make
+
+(env) ubuntu@vps-a35f6ef3:~/pillow-testing/env/share/myhdl/cosimulation/icarus$ ls
+Makefile    myhdl.c  myhdl.vpi         myhdl_table.c  test
+README.txt  myhdl.o  myhdl_20030518.c  myhdl_table.o
+
+(env) ubuntu@vps-a35f6ef3:~/pillow-testing$ git clone https://github.com/myhdl/myhdl.git
+Cloning into 'myhdl'...
+remote: Enumerating objects: 15429, done.
+remote: Counting objects: 100% (309/309), done.
+remote: Compressing objects: 100% (227/227), done.
+remote: Total 15429 (delta 207), reused 82 (delta 82), pack-reused 15120 (from 2)
+Receiving objects: 100% (15429/15429), 13.19 MiB | 13.02 MiB/s, done.
+Resolving deltas: 100% (5284/5284), done.
+
+(env) ubuntu@vps-a35f6ef3:~/pillow-testing$ cp myhdl/example/manual/fsm*.py .
+
+(env) ubuntu@vps-a35f6ef3:~/pillow-testing$ python3 fsm.py
+(env) ubuntu@vps-a35f6ef3:~/pillow-testing$ python3 fsm2.py
+/home/ubuntu/pillow-testing/fsm2.py:95: DeprecationWarning: 
+    traceSignals(): Deprecated usage: See http://dev.myhdl.org/meps/mep-114.html
+  tb_fsm = traceSignals(testbench)
+(env) ubuntu@vps-a35f6ef3:~/pillow-testing$ python3 fsm3.py
+
+(env) ubuntu@vps-a35f6ef3:~/pillow-testing$ gtkwave fsm2.vcd 
+
+GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+
+[0] start time.
+[690] end time.
+
