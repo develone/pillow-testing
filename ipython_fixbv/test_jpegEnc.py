@@ -3,7 +3,7 @@ from _jpegEnc import JPEGEnc2k
 import math
  
 jp2k = JPEGEnc2k()
-help(jp2k)
+#help(jp2k)
 jp2k.set_img_fn("../lena_rgb_256.png")
 #jp2k.set_img_fn("../lena.jpg")
 #jp2k.set_img_fn("../lena_256.png")
