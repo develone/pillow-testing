@@ -1,2 +1,2 @@
-GDK_BACKEND=x11 gtkwave $1 
+GDK_BACKEND=x11 gtkwave  
 
