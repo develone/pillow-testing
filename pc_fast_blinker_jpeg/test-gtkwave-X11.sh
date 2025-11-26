@@ -1,4 +1,4 @@
-#!/bin/bashy
+#!/bin/bash
 
 GDK_BACKEND=x11 gtkwave  
 
