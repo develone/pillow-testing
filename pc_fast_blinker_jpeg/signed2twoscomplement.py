@@ -35,8 +35,8 @@ def tb(clk, res_o, z):
             yield clk.posedge
             res_o.next = t[W0:]
             yield clk.posedge
-            print ("i = %4d 9 bits %s 8 bits %s ") % (i, bin(t,W0+1),bin(t,W0+1)) 
-            print ("res_o = %d z.signed() = %d z = %d 9 bits %s 8 bits %s ") % (res_o, z.signed(), z, bin(res_o,W0+1), bin(z, W0))
+            print(("i = %4d 9 bits %s 8 bits %s ") % (i, bin(t,W0+1),bin(t,W0+1))) 
+            print(("res_o = %d z.signed() = %d z = %d 9 bits %s 8 bits %s ") % (res_o, z.signed(), z, bin(res_o,W0+1), bin(z, W0)))
         raise StopSimulation
     return instances()
 
