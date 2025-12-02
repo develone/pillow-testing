@@ -146,6 +146,9 @@ def tb(flgs,upd,lft,sam,rht,lift,done,clock,res_o, z):
 def convert(args):
     toVerilog(dwt,flgs,upd,lft,sam,rht,lift,done,clock)
     toVerilog(signed2twoscomplement, res_o, z)
+    toVHDL(dwt,flgs,upd,lft,sam,rht,lift,done,clock)
+    toVHDL(signed2twoscomplement, res_o, z)
+    
     #toVHDL(dwt_top,clock)
  
 def main():
